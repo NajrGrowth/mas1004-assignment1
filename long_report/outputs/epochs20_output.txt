@@ -1,0 +1,41 @@
+reading /Users/noahruijpers/Desktop/mas1004-assignment1/data/clean
+600 images, 4 classes, read in 2 s
+  back_double_biceps       150
+  back_lat_spread          150
+  side_chest               150
+  side_triceps             150
+training on 480, testing on 120
+model has 11,178,564 parameters, 11,178,564 of them will be trained
+epoch   1/20  train loss 0.8759 acc 68.3%  test loss 0.5945 acc 83.3%
+epoch   2/20  train loss 0.1886 acc 95.4%  test loss 0.5357 acc 83.3%
+epoch   3/20  train loss 0.0919 acc 97.3%  test loss 0.5316 acc 84.2%
+epoch   4/20  train loss 0.0630 acc 97.7%  test loss 0.5316 acc 83.3%
+epoch   5/20  train loss 0.0485 acc 98.1%  test loss 0.5560 acc 85.0%
+epoch   6/20  train loss 0.0529 acc 97.7%  test loss 0.5479 acc 85.0%
+epoch   7/20  train loss 0.0490 acc 97.9%  test loss 0.5450 acc 85.8%
+epoch   8/20  train loss 0.0419 acc 98.3%  test loss 0.5494 acc 83.3%
+epoch   9/20  train loss 0.0445 acc 98.3%  test loss 0.5424 acc 82.5%
+epoch  10/20  train loss 0.0393 acc 97.9%  test loss 0.5608 acc 80.8%
+epoch  11/20  train loss 0.0342 acc 98.3%  test loss 0.5580 acc 83.3%
+epoch  12/20  train loss 0.0343 acc 97.9%  test loss 0.5780 acc 83.3%
+epoch  13/20  train loss 0.0333 acc 98.1%  test loss 0.5766 acc 83.3%
+epoch  14/20  train loss 0.0307 acc 98.1%  test loss 0.5685 acc 85.0%
+epoch  15/20  train loss 0.0263 acc 99.0%  test loss 0.5871 acc 85.8%
+epoch  16/20  train loss 0.0284 acc 98.3%  test loss 0.5807 acc 85.0%
+epoch  17/20  train loss 0.0291 acc 98.5%  test loss 0.6222 acc 82.5%
+epoch  18/20  train loss 0.0335 acc 98.1%  test loss 0.6103 acc 84.2%
+epoch  19/20  train loss 0.0261 acc 98.5%  test loss 0.6030 acc 85.0%
+epoch  20/20  train loss 0.0261 acc 98.3%  test loss 0.6053 acc 85.8%
+
+trained in 1.3 minutes
+train accuracy 98.8%
+test  accuracy 85.8%
+wrote /Users/noahruijpers/Desktop/mas1004-assignment1/results/epochs20_curves.png
+wrote /Users/noahruijpers/Desktop/mas1004-assignment1/results/epochs20_confusion.png
+worst_examples is not written yet (Problem 5), so there is no epochs20_worst.png this time
+wrote /Users/noahruijpers/Desktop/mas1004-assignment1/results/epochs20_model.pt
+
+One line for your experiment table:
+| epochs20 | ImageNet | all layers | 20 | 0.0001 | 11,178,564 | 98.8% | 85.8% |
+
+To put this model on your web page: python src/export_web.py --tag epochs20

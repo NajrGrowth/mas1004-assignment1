@@ -1,0 +1,31 @@
+reading /Users/noahruijpers/Desktop/mas1004-assignment1/data/clean
+600 images, 4 classes, read in 2 s
+  back_double_biceps       150
+  back_lat_spread          150
+  side_chest               150
+  side_triceps             150
+training on 480, testing on 120
+model has 11,178,564 parameters, 11,178,564 of them will be trained
+epoch   1/10  train loss 1.4319 acc 33.1%  test loss 1.3856 acc 30.0%
+epoch   2/10  train loss 1.0839 acc 63.1%  test loss 1.3687 acc 39.2%
+epoch   3/10  train loss 0.7481 acc 80.2%  test loss 1.3624 acc 44.2%
+epoch   4/10  train loss 0.3763 acc 91.7%  test loss 1.6653 acc 46.7%
+epoch   5/10  train loss 0.1754 acc 96.2%  test loss 2.3531 acc 45.0%
+epoch   6/10  train loss 0.1746 acc 95.8%  test loss 3.0097 acc 39.2%
+epoch   7/10  train loss 0.1298 acc 97.1%  test loss 1.6372 acc 55.8%
+epoch   8/10  train loss 0.1162 acc 96.9%  test loss 1.8264 acc 45.8%
+epoch   9/10  train loss 0.1142 acc 96.9%  test loss 1.6463 acc 54.2%
+epoch  10/10  train loss 0.1061 acc 97.3%  test loss 2.5620 acc 45.8%
+
+trained in 0.6 minutes
+train accuracy 83.3%
+test  accuracy 45.8%
+wrote /Users/noahruijpers/Desktop/mas1004-assignment1/results/scratch_curves.png
+wrote /Users/noahruijpers/Desktop/mas1004-assignment1/results/scratch_confusion.png
+worst_examples is not written yet (Problem 5), so there is no scratch_worst.png this time
+wrote /Users/noahruijpers/Desktop/mas1004-assignment1/results/scratch_model.pt
+
+One line for your experiment table:
+| scratch | random | all layers | 10 | 0.0001 | 11,178,564 | 83.3% | 45.8% |
+
+To put this model on your web page: python src/export_web.py --tag scratch

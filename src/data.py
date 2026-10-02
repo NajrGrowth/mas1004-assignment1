@@ -7,7 +7,10 @@ that the model can eat.
 Run `pytest tests/test_data.py` after you fill them in.
 """
 
+from pathlib import Path
+
 import numpy as np
+from PIL import Image
 
 # Files with any other extension should be ignored.
 IMAGE_SUFFIXES = {".jpg", ".jpeg", ".png", ".bmp", ".webp"}
@@ -50,7 +53,32 @@ def prepare_image(image):
     The web page does these same six steps in JavaScript. If your version is
     different, the self test badge at the top of your page turns red.
     """
-    raise NotImplementedError("Problem 2: fill in prepare_image")
+    # 1. RGB, whatever the file was.
+    image = image.convert("RGB")
+
+    # 2. Shorter side to RESIZE, keeping the shape. torchvision rounds the
+    #    longer side down, so do the same to get the same pixels.
+    width, height = image.size
+    if width <= height:
+        size = (RESIZE, int(RESIZE * height / width))
+    else:
+        size = (int(RESIZE * width / height), RESIZE)
+    image = image.resize(size, Image.BILINEAR)
+
+    # 3. The CROP x CROP square in the middle.
+    width, height = image.size
+    left = int(round((width - CROP) / 2.0))
+    top = int(round((height - CROP) / 2.0))
+    image = image.crop((left, top, left + CROP, top + CROP))
+
+    # 4. Values between 0.0 and 1.0.
+    x = np.asarray(image, dtype=np.float32) / 255.0
+
+    # 5. Each channel minus its mean, divided by its standard deviation.
+    x = (x - np.array(MEAN, dtype=np.float32)) / np.array(STD, dtype=np.float32)
+
+    # 6. Channels first: (224, 224, 3) becomes (3, 224, 224).
+    return np.ascontiguousarray(x.transpose(2, 0, 1), dtype=np.float32)
 
 
 def load_folder(root):
@@ -83,7 +111,30 @@ def load_folder(root):
     Memory: every image becomes 3 x 224 x 224 numbers of 4 bytes, about 0.6 MB.
     750 images is about 450 MB. That fits on Colab and on most laptops.
     """
-    raise NotImplementedError("Problem 2: fill in load_folder")
+    root = Path(root)
+    class_names = sorted(d.name for d in root.iterdir() if d.is_dir())
+
+    files = []
+    for label, name in enumerate(class_names):
+        for path in sorted((root / name).iterdir()):
+            if path.is_file() and path.suffix.lower() in IMAGE_SUFFIXES:
+                files.append((path, label))
+
+    # Fill one array as we go instead of stacking a list at the end, so that
+    # all the images are not held in memory twice.
+    X = np.empty((len(files), 3, CROP, CROP), dtype=np.float32)
+    y, paths = [], []
+    for path, label in files:
+        try:
+            with Image.open(path) as image:
+                X[len(y)] = prepare_image(image)
+        except Exception as error:
+            print(f"skipping {path}: {error}")
+            continue
+        y.append(label)
+        paths.append(path)
+
+    return X[:len(y)], np.array(y, dtype=np.int64), class_names, paths
 
 
 def split_train_test(X, y, paths, test_ratio=0.2, seed=0):
@@ -102,4 +153,22 @@ def split_train_test(X, y, paths, test_ratio=0.2, seed=0):
         up with a class that has no test images at all, and then your accuracy
         number means nothing.
     """
-    raise NotImplementedError("Problem 2: fill in split_train_test")
+    rng = np.random.default_rng(seed)
+    train_rows, test_rows = [], []
+
+    # Split each class on its own, so that every class lands on both sides
+    # in the same proportion.
+    for label in np.unique(y):
+        rows = rng.permutation(np.flatnonzero(y == label))
+        n_test = int(round(len(rows) * test_ratio))
+        n_test = min(max(n_test, 1), len(rows) - 1)
+        test_rows.extend(rows[:n_test])
+        train_rows.extend(rows[n_test:])
+
+    # Each row index is used once, so no image can be on both sides.
+    train_rows = np.sort(train_rows)
+    test_rows = np.sort(test_rows)
+    return (
+        X[train_rows], y[train_rows], [paths[i] for i in train_rows],
+        X[test_rows], y[test_rows], [paths[i] for i in test_rows],
+    )

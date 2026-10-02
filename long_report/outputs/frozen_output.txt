@@ -1,0 +1,31 @@
+reading /Users/noahruijpers/Desktop/mas1004-assignment1/data/clean
+600 images, 4 classes, read in 2 s
+  back_double_biceps       150
+  back_lat_spread          150
+  side_chest               150
+  side_triceps             150
+training on 480, testing on 120
+model has 11,178,564 parameters, 2,052 of them will be trained
+epoch   1/10  train loss 1.3797 acc 32.3%  test loss 1.2028 acc 54.2%
+epoch   2/10  train loss 1.0382 acc 63.3%  test loss 1.0218 acc 57.5%
+epoch   3/10  train loss 0.8831 acc 72.1%  test loss 0.9060 acc 66.7%
+epoch   4/10  train loss 0.7925 acc 74.0%  test loss 0.8480 acc 69.2%
+epoch   5/10  train loss 0.7468 acc 76.9%  test loss 0.8054 acc 70.8%
+epoch   6/10  train loss 0.6740 acc 80.2%  test loss 0.7803 acc 72.5%
+epoch   7/10  train loss 0.6172 acc 82.5%  test loss 0.7465 acc 77.5%
+epoch   8/10  train loss 0.5759 acc 83.1%  test loss 0.7228 acc 72.5%
+epoch   9/10  train loss 0.5608 acc 82.7%  test loss 0.7095 acc 74.2%
+epoch  10/10  train loss 0.5258 acc 84.8%  test loss 0.7094 acc 75.8%
+
+trained in 0.2 minutes
+train accuracy 86.9%
+test  accuracy 75.8%
+wrote /Users/noahruijpers/Desktop/mas1004-assignment1/results/frozen_curves.png
+wrote /Users/noahruijpers/Desktop/mas1004-assignment1/results/frozen_confusion.png
+worst_examples is not written yet (Problem 5), so there is no frozen_worst.png this time
+wrote /Users/noahruijpers/Desktop/mas1004-assignment1/results/frozen_model.pt
+
+One line for your experiment table:
+| frozen | ImageNet | last layer | 10 | 0.001 | 2,052 | 86.9% | 75.8% |
+
+To put this model on your web page: python src/export_web.py --tag frozen

@@ -53,7 +53,10 @@ thing you care about.}
 \toprule
 tag & start & trained & epochs & lr & trainable parameters & train acc. & test acc. \\
 \midrule
-\multicolumn{8}{l}{\fillin{one row per run, as run.py printed it}} \\
+run & ImageNet & all layers & 10 & 0.0001 & 11,178,564 & 98.8\% & 83.3\% \\
+scratch & random & all layers & 10 & 0.0001 & 11,178,564 & 83.3\% & 45.8\% \\
+frozen & ImageNet & last layer & 10 & 0.001 & 2,052 & 86.9\% & 75.8\% \\
+epochs20 & ImageNet & all layers & 20 & 0.0001 & 11,178,564 & 98.8\% & 85.8\% \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -77,7 +80,7 @@ random numbers, and why you think that is.}
 \outputfile{outputs/run_output.txt}
 \outputfile{outputs/scratch_output.txt}
 \outputfile{outputs/frozen_output.txt}
-% One more line like these for the setting you chose, named by its tag.
+\outputfile{outputs/epochs20_output.txt}
 \fillin{the output of the run with your own setting}
 
 % ---------------------------------------------------------------------------
