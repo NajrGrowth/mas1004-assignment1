@@ -87,25 +87,82 @@ random numbers, and why you think that is.}
 \section*{Problem 4. Cleaning}
 
 \subsection*{My rule}
-\fillin{Your rule, in one or two sentences, as you wrote it before you
-started.}
+It is not an actual photograph of a person performing the pose — this excludes video thumbnails with text overlays, cartoon/diagram illustrations explaining a pose or muscle group, AI-generated images, and overview/collage images showing several different poses at once.
+
+The person is wearing regular clothing rather than posing in competition or training attire.
+
+More than one person is a main subject of the photo, making it unclear who the label refers to.
+
+The pose shown is visibly a different pose than the category name — for example, a Front Lat Spread photo filed under Back Lat Spread, someone performing a gym exercise (lat pulldown, tricep pushdown) instead of holding the static pose, or a Back Double Biceps pose filed under Back Lat Spread.
+
+The image is a near-duplicate of another image already kept in the same category (same photo, different crop/watermark/quality).
+
+\textbf{Addition to my rule, made after seeing the suspect list:} For near-copies that appear across two different categories (the same photo filed under two different pose labels), I check which pose the photo actually shows. If it clearly matches one category, I keep it there and remove it from the other. If it is ambiguous which pose it shows, I remove it from both categories entirely, since keeping it in either would teach the model an unreliable label.
+
+\textbf{Further additions, made while removing images after seeing the suspect list:} seven reasons I used do not match a line of the rule above as first written, so I add them here:
+\begin{itemize}
+  \item not a bodybuilding pose (stretch, not a competition pose) (2 images)
+  \item wrong camera angle, pose not identifiable (6 images)
+  \item not an actual photograph (low-quality screenshot of a social media post) (12 images)
+  \item image combines a front and back view in one picture, does not match a single pose (1 image)
+  \item image combines parts of two different people's bodies (1 image)
+  \item image quality too poor to identify the pose (2 images)
+  \item incomplete person visible in frame (1 image)
+\end{itemize}
 
 \subsection*{Three kinds of junk}
-\fillin{Three kinds of junk, with one picture of each.}
+\sidebyside{figures/junk_thumbnail_back_lat_spread_0011.jpg}
+           {1. A video thumbnail with text overlay (back\_lat\_spread/0011.jpg)}
+           {figures/junk_wrong_pose_back_lat_spread_0022.jpg}
+           {2. A wrong pose: back double biceps mislabeled as back lat spread
+            (back\_lat\_spread/0022.jpg)}
 
-% For example: \picturefile[0.3\linewidth]{figures/junk_1.jpg}
+\sidebyside{figures/junk_near_duplicate_side_chest_0046.jpg}
+           {3. A near-duplicate, removed (side\_chest/0046.jpg)}
+           {figures/junk_near_duplicate_kept_side_chest_0032.jpg}
+           {the image kept from its group (side\_chest/0032.jpg), similarity 0.9803}
 
 \subsection*{What I removed}
 \outputfile{outputs/clean_count.txt}
 
-\fillin{How many near copies it found, and what you did with them.}
+The initial clean.py suspects run on the original 600 images found 139 near-copy pairs (this breakdown came from an ad-hoc command, not repository code): 35 same-category pairs at similarity $\geq$0.99, 78 same-category pairs at 0.95–0.99, 16 cross-category pairs at $\geq$0.99, and 10 cross-category pairs at 0.95–0.99.
 
-\fillin{Of the first 20 suspects in each class, how many you removed. Whether
-the suspects included junk you had missed, and whether you found junk it did
-not list.}
+For the 113 same-category pairs, I first dealt with the ones that also broke another rule (32 pairs had both images removed for other reasons, such as being video thumbnails or showing the wrong pose). Of the remaining 81 pairs, which formed 40 distinct groups, I kept exactly one image per group and removed the rest as near-duplicates (60 images removed in total). Two groups were an exception: in one, the two images (similarity 0.9775) turned out to be different photographs of different people, not copies, so both were kept; in another, two images were visually distinct frames from the same photo series (not directly flagged as similar to each other by the tool) and were both kept.
+
+For the 26 cross-category pairs (the same photo filed under two different pose labels, often forming groups of 3–7 images across Side Chest and Side Triceps in particular), I applied my rule's addition: where the pose was clearly identifiable, I kept it in its correct category and removed it from the other(s) — this applied to 3 groups. The remaining 6 groups were removed entirely from all categories, though in every case for a specific reason (video thumbnail, stretch pose, regular clothing, or illustration) rather than because the pose itself was ambiguous.
+
+Of the first 20 suspects in each class, I removed: back\_double\_biceps 9,
+back\_lat\_spread 17, side\_chest 18, side\_triceps 17. These counts were
+computed with an ad-hoc command, not with code in this repository, because
+\texttt{clean.py count} does not break the removals down this way: it matched
+the first 20 suspects of each class in
+\texttt{results/cleaning/suspects/suspects.csv} against the files in
+\texttt{data/removed/}.
+
+After cleaning, back\_lat\_spread had 74 images left, far fewer than the
+other three classes, so I downloaded more with the search phrase ``back lat
+spread pose bodybuilding competition''. The download kept 150 images. 91 of
+them were near copies (similarity above 0.95, the threshold \texttt{clean.py}
+uses): 54 matched existing clean images, 35 matched previously removed
+images, and 2 were near-duplicates of each other within the new download. I
+left these 91 out. I added the
+other 59 to \texttt{data/raw/back\_lat\_spread} and
+\texttt{data/clean/back\_lat\_spread} as \texttt{0151.jpg} to \texttt{0209.jpg},
+applied my rule to them, and removed 30, which leaves 29. The 150, 91 (with its breakdown) and 59
+were computed with an ad-hoc script, not with code in this repository, which
+has no command for adding to one class; the 30 removed are in the
+\texttt{clean.py count} output above. These 59 images were not in the suspect
+list, so the first-20 counts above do not include them.
+
+The suspect list caught most of the junk I had already noticed during an initial scan — mainly video thumbnails, illustrations, and the more obvious near-duplicates. It was not exhaustive, however. Going through every remaining image individually after clearing the suspects, I found substantially more junk it had not flagged: most notably images showing the wrong pose entirely (12 Front Lat Spread and 1 Back Double Biceps photo mislabeled as Back Lat Spread, for example), multiple-person photos, and low-quality social media screenshots. This second pass removed more images (115) than the first suspect-based pass (92). A separate near-copy sheet, built specifically to find same-category duplicate groups, then caught a further 60 duplicate images that neither the original suspect ranking nor my own manual scan had removed, since visually ``normal'' duplicate photos don't stand out the way genuinely odd or wrong images do. This suggests the suspect detector is better at catching visually unusual outliers than at catching confidently normal-looking images that are either mislabeled or simply repeated.
 
 \subsection*{Before and after cleaning}
 \outputfile{outputs/compare.txt}
+
+The data for the clean model differs from the data for the first run in two
+ways: the cleaning, and the 29 back\_lat\_spread images added after it from a
+second download. So this comparison shows the effect of both together, not of
+cleaning alone.
 
 \fillin{The test accuracy and the accuracy on your new images, before and
 after. If a number went down, why you think it did.}

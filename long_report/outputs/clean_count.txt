@@ -1,0 +1,40 @@
+class                    downloaded  removed   kept  other
+back_double_biceps              150       36    114      0
+back_lat_spread                 209      123     86      0
+side_chest                      150       64     86      0
+side_triceps                    150       74     76      0
+
+reasons
+    75  wrong pose
+    60  near-duplicate of another image kept in the same category
+    28  not an actual photograph (video thumbnail with text)
+    21  more than one person in frame
+    20  person performing a gym exercise, not holding the pose
+    18  wrong pose, shows front lat spread instead of back lat spread
+    12  not an actual photograph (low-quality screenshot of a social media post)
+     8  person is wearing regular clothing, not posing
+     7  not an actual photograph (AI-generated illustration)
+     7  not an actual photograph (illustration/animation)
+     6  wrong camera angle, pose not identifiable
+     6  not an actual photograph (illustration)
+     6  wrong pose, shows back double biceps instead of back lat spread
+     3  not an actual photograph (text article graphic)
+     2  not a bodybuilding pose (stretch, not a competition pose)
+     2  wrong pose, shows front double biceps instead of back double biceps
+     2  image quality too poor to identify the pose
+     1  cross-category copy, shows back double biceps
+     1  cross-category copy, shows back lat spread
+     1  cross-category copy, shows side chest
+     1  wrong pose, and not an actual photograph (video thumbnail with text)
+     1  image combines a front and back view in one picture, does not match a single pose
+     1  image combines parts of two different people's bodies
+     1  not an actual photograph (illustration), and shows a gym exercise rather than the pose
+     1  person is wearing regular clothing, and shows front lat spread instead of back lat spread
+     1  incomplete person visible in frame
+     1  not an actual photograph (poster/graphic)
+     1  wrong pose (poor posing form, not a competition-standard back lat spread)
+     1  not an actual photograph (advertisement graphic)
+     1  wrong pose, shows side triceps
+     1  wrong pose, shows Men's Physique pose instead of side chest
+
+"other" is images that are in data/raw but neither in data/clean nor removed with `clean.py remove`, for example ones you deleted by hand. Their reasons are not recorded.
