@@ -1,0 +1,12 @@
+grey block areas in pixels: guess 1 (both arm blocks together) and guess 2 (back block)
+
+  image                 size       arms       back  back/arms   check on the changed files
+  IMG_0512.jpeg   1179x2556     144,677    106,546       0.74   JPEG, not checked
+  IMG_0513.PNG    1179x2556     130,002     68,904       0.53   130,002 and 68,904 pixels differ
+  IMG_1481.PNG    1179x2556     308,415    193,620       0.63   308,415 and 193,620 pixels differ
+  IMG_2234.PNG    1179x2556     295,680    181,376       0.61   295,680 and 181,376 pixels differ
+  IMG_2306.PNG    1179x2556     263,725    146,692       0.56   263,725 and 146,692 pixels differ
+  IMG_2359.PNG    1179x2556     259,198    186,705       0.72   259,198 and 186,705 pixels differ
+  IMG_9293.jpeg   3024x4032   2,424,438    941,107       0.39   JPEG, not checked
+
+  back/arms over all 7 images together: 0.48

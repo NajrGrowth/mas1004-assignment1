@@ -23,7 +23,6 @@ The model you exported for the web page
   ok       4 classes: back_double_biceps, back_lat_spread, side_chest, side_triceps
   ok       model.onnx is 44.8 MB, 11,178,564 parameters
            input [1, 3, 224, 224], prepared as: shorter side 256, centre 224 x 224, mean [0.485, 0.456, 0.406], std [0.229, 0.224, 0.225]
-  warning  docs/model.onnx is not committed. Your published page will not have a model until you commit and push it.
 
 Does the exported model give the answers Python gave?
 -----------------------------------------------------
@@ -47,6 +46,4 @@ Your images from a new source  (/Users/noahruijpers/mas1004-assignment1/data/new
 Summary
 -------
   nothing is broken
-  1 thing(s) worth a sentence in your report:
-    - docs/model.onnx is not committed. Your published page will not have a model until you commit and push it.
 

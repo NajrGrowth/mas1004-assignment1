@@ -1,0 +1,71 @@
+model: results/clean_model.pt
+folders:
+  data/new_images/back_double_biceps
+  data/changed/bdb_arms_covered
+  data/changed/bdb_upperback_covered
+  data/changed/bdb_upperback_control
+left out of the means (answers still printed, marked *):
+  data/changed/bdb_upperback_control/IMG_1481.PNG
+
+IMG_0512.jpeg
+  folder                              back_double_biceps     back_lat_spread          side_chest        side_triceps  answer
+  data/new_images/back_double_biceps               98.8%                0.4%                0.6%                0.2%  back_double_biceps
+  data/changed/bdb_arms_covered                    41.2%                3.6%                9.0%               46.3%  side_triceps
+  data/changed/bdb_upperback_covered               67.9%               19.9%                5.5%                6.7%  back_double_biceps
+  data/changed/bdb_upperback_control               98.5%                0.7%                0.7%                0.1%  back_double_biceps
+
+IMG_0513.PNG
+  folder                              back_double_biceps     back_lat_spread          side_chest        side_triceps  answer
+  data/new_images/back_double_biceps               97.9%                1.2%                0.6%                0.3%  back_double_biceps
+  data/changed/bdb_arms_covered                    51.8%               17.4%                7.6%               23.2%  back_double_biceps
+  data/changed/bdb_upperback_covered               91.3%                4.6%                2.1%                2.0%  back_double_biceps
+  data/changed/bdb_upperback_control               97.7%                1.5%                0.6%                0.2%  back_double_biceps
+
+IMG_1481.PNG
+  folder                              back_double_biceps     back_lat_spread          side_chest        side_triceps  answer
+  data/new_images/back_double_biceps               98.5%                0.8%                0.5%                0.2%  back_double_biceps
+  data/changed/bdb_arms_covered                    48.0%               26.6%                7.8%               17.6%  back_double_biceps
+  data/changed/bdb_upperback_covered               82.2%               10.9%                4.2%                2.6%  back_double_biceps
+  data/changed/bdb_upperback_control               98.5%                0.8%                0.5%                0.2%  back_double_biceps *
+
+IMG_2234.PNG
+  folder                              back_double_biceps     back_lat_spread          side_chest        side_triceps  answer
+  data/new_images/back_double_biceps               98.9%                0.6%                0.2%                0.4%  back_double_biceps
+  data/changed/bdb_arms_covered                    57.5%               19.5%                2.8%               20.2%  back_double_biceps
+  data/changed/bdb_upperback_covered               87.2%                5.1%                2.1%                5.7%  back_double_biceps
+  data/changed/bdb_upperback_control               98.7%                0.8%                0.1%                0.3%  back_double_biceps
+
+IMG_2306.PNG
+  folder                              back_double_biceps     back_lat_spread          side_chest        side_triceps  answer
+  data/new_images/back_double_biceps               99.1%                0.5%                0.2%                0.2%  back_double_biceps
+  data/changed/bdb_arms_covered                    71.7%                5.3%                2.2%               20.8%  back_double_biceps
+  data/changed/bdb_upperback_covered               93.3%                2.5%                1.7%                2.6%  back_double_biceps
+  data/changed/bdb_upperback_control               98.9%                0.7%                0.2%                0.2%  back_double_biceps
+
+IMG_2359.PNG
+  folder                              back_double_biceps     back_lat_spread          side_chest        side_triceps  answer
+  data/new_images/back_double_biceps               97.6%                1.6%                0.3%                0.5%  back_double_biceps
+  data/changed/bdb_arms_covered                    61.1%               21.9%                1.3%               15.7%  back_double_biceps
+  data/changed/bdb_upperback_covered               85.8%                5.8%                2.1%                6.3%  back_double_biceps
+  data/changed/bdb_upperback_control               97.6%                1.6%                0.3%                0.5%  back_double_biceps
+
+IMG_9293.jpeg
+  folder                              back_double_biceps     back_lat_spread          side_chest        side_triceps  answer
+  data/new_images/back_double_biceps               95.5%                3.2%                0.5%                0.8%  back_double_biceps
+  data/changed/bdb_arms_covered                     5.4%               35.2%                4.7%               54.7%  side_triceps
+  data/changed/bdb_upperback_covered               79.4%               13.3%                3.0%                4.4%  back_double_biceps
+  data/changed/bdb_upperback_control               97.3%                2.1%                0.4%                0.3%  back_double_biceps
+
+mean probability over the images in each folder (without the ones marked *)
+  folder                              back_double_biceps     back_lat_spread          side_chest        side_triceps  images
+  data/new_images/back_double_biceps               98.1%                1.2%                0.4%                0.4%       7
+  data/changed/bdb_arms_covered                    48.1%               18.5%                5.1%               28.4%       7
+  data/changed/bdb_upperback_covered               83.9%                8.9%                3.0%                4.3%       7
+  data/changed/bdb_upperback_control               98.1%                1.2%                0.4%                0.3%       6
+
+mean probability without IMG_1481.PNG
+  folder                              back_double_biceps     back_lat_spread          side_chest        side_triceps  images
+  data/new_images/back_double_biceps               98.0%                1.2%                0.4%                0.4%       6
+  data/changed/bdb_arms_covered                    48.1%               17.2%                4.6%               30.1%       6
+  data/changed/bdb_upperback_covered               84.1%                8.5%                2.7%                4.6%       6
+  data/changed/bdb_upperback_control               98.1%                1.2%                0.4%                0.3%       6
