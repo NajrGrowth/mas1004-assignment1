@@ -1,0 +1,4 @@
+describing 28 images with ResNet18 ...
+none of your 28 new images is a near copy of any of the 651 images you downloaded
+
+the closest any new image comes to a downloaded one: 0.88 (near copies are above 0.95)

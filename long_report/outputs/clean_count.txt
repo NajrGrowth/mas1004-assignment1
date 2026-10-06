@@ -1,6 +1,6 @@
 class                    downloaded  removed   kept  other
 back_double_biceps              150       36    114      0
-back_lat_spread                 209      123     86      0
+back_lat_spread                 209      124     85      0
 side_chest                      150       64     86      0
 side_triceps                    150       74     76      0
 
@@ -10,7 +10,7 @@ reasons
     28  not an actual photograph (video thumbnail with text)
     21  more than one person in frame
     20  person performing a gym exercise, not holding the pose
-    18  wrong pose, shows front lat spread instead of back lat spread
+    19  wrong pose, shows front lat spread instead of back lat spread
     12  not an actual photograph (low-quality screenshot of a social media post)
      8  person is wearing regular clothing, not posing
      7  not an actual photograph (AI-generated illustration)

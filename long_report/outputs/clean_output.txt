@@ -1,0 +1,31 @@
+reading /Users/noahruijpers/mas1004-assignment1/data/clean
+361 images, 4 classes, read in 1 s
+  back_double_biceps       114
+  back_lat_spread          85
+  side_chest               86
+  side_triceps             76
+training on 289, testing on 72
+model has 11,178,564 parameters, 11,178,564 of them will be trained
+epoch   1/10  train loss 1.0526 acc 54.3%  test loss 0.3981 acc 93.1%
+epoch   2/10  train loss 0.2732 acc 99.0%  test loss 0.1837 acc 95.8%
+epoch   3/10  train loss 0.2071 acc 99.7%  test loss 0.1624 acc 95.8%
+epoch   4/10  train loss 0.1718 acc 99.7%  test loss 0.1257 acc 95.8%
+epoch   5/10  train loss 0.1425 acc 99.7%  test loss 0.1093 acc 95.8%
+epoch   6/10  train loss 0.1472 acc 99.7%  test loss 0.1045 acc 97.2%
+epoch   7/10  train loss 0.1294 acc 100.0%  test loss 0.1140 acc 95.8%
+epoch   8/10  train loss 0.1492 acc 99.7%  test loss 0.1155 acc 95.8%
+epoch   9/10  train loss 0.1844 acc 99.7%  test loss 0.1115 acc 97.2%
+epoch  10/10  train loss 0.1462 acc 99.7%  test loss 0.0973 acc 97.2%
+
+trained in 0.4 minutes
+train accuracy 100.0%
+test  accuracy 97.2%
+wrote /Users/noahruijpers/mas1004-assignment1/results/clean_curves.png
+wrote /Users/noahruijpers/mas1004-assignment1/results/clean_confusion.png
+wrote /Users/noahruijpers/mas1004-assignment1/results/clean_worst.png
+wrote /Users/noahruijpers/mas1004-assignment1/results/clean_model.pt
+
+One line for your experiment table:
+| clean | ImageNet | all layers | 10 | 0.0001 | 11,178,564 | 100.0% | 97.2% |
+
+To put this model on your web page: python src/export_web.py --tag clean

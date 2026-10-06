@@ -57,6 +57,7 @@ run & ImageNet & all layers & 10 & 0.0001 & 11,178,564 & 98.8\% & 83.3\% \\
 scratch & random & all layers & 10 & 0.0001 & 11,178,564 & 83.3\% & 45.8\% \\
 frozen & ImageNet & last layer & 10 & 0.001 & 2,052 & 86.9\% & 75.8\% \\
 epochs20 & ImageNet & all layers & 20 & 0.0001 & 11,178,564 & 98.8\% & 85.8\% \\
+clean & ImageNet & all layers & 10 & 0.0001 & 11,178,564 & 100.0\% & 97.2\% \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -81,7 +82,7 @@ random numbers, and why you think that is.}
 \outputfile{outputs/scratch_output.txt}
 \outputfile{outputs/frozen_output.txt}
 \outputfile{outputs/epochs20_output.txt}
-\fillin{the output of the run with your own setting}
+\outputfile{outputs/clean_output.txt}
 
 % ---------------------------------------------------------------------------
 \section*{Problem 4. Cleaning}
@@ -148,9 +149,11 @@ images, and 2 were near-duplicates of each other within the new download. I
 left these 91 out. I added the
 other 59 to \texttt{data/raw/back\_lat\_spread} and
 \texttt{data/clean/back\_lat\_spread} as \texttt{0151.jpg} to \texttt{0209.jpg},
-applied my rule to them, and removed 30, which leaves 29. The 150, 91 (with its breakdown) and 59
+applied my rule to them, and removed 31 (30 at first, and \texttt{0180.jpg} later,
+after it appeared among the clean model's most confident mistakes and I saw it
+shows a front lat spread), which leaves 28. The 150, 91 (with its breakdown) and 59
 were computed with an ad-hoc script, not with code in this repository, which
-has no command for adding to one class; the 30 removed are in the
+has no command for adding to one class; the 31 removed are in the
 \texttt{clean.py count} output above. These 59 images were not in the suspect
 list, so the first-20 counts above do not include them.
 
@@ -159,8 +162,12 @@ The suspect list caught most of the junk I had already noticed during an initial
 \subsection*{Before and after cleaning}
 \outputfile{outputs/compare.txt}
 
+\picturefile{figures/clean_curves.png}
+
+\begin{center}\picturefile[0.5\linewidth]{figures/clean_confusion.png}\end{center}
+
 The data for the clean model differs from the data for the first run in two
-ways: the cleaning, and the 29 back\_lat\_spread images added after it from a
+ways: the cleaning, and the 28 back\_lat\_spread images added after it from a
 second download. So this comparison shows the effect of both together, not of
 cleaning alone.
 
@@ -178,6 +185,11 @@ among your downloads.}
 \fillin{The accuracy on your downloaded test set and on your new images, side
 by side.}
 
+The clean model's most confident mistakes on the downloaded test set
+(\texttt{results/clean\_worst.png}):
+
+\begin{center}\picturefile{figures/clean_worst.png}\end{center}
+
 \fillin{Five mistakes it was confident about, with the pictures. For each one,
 what in the image you think pushed it the wrong way.}
 
@@ -188,6 +200,16 @@ distance, what else is in the frame.}
 \section*{Problem 6. The demo}
 
 Address: \fillin{your GitHub Pages address}
+
+\sidebyside{figures/demo_front_double_biceps.png}
+           {A front double biceps pose, which is none of my categories. The
+            demo page said back\_double\_biceps at 99.1\%.}
+           {figures/demo_vacuum_pose_cropped.png}
+           {A vacuum pose, which is none of my categories. The demo page said
+            back\_double\_biceps at 57.1\%.}
+
+The percentages above were shown by the demo page in the browser, not printed
+by code in this repository.
 
 \fillin{What happens when you show it something that is none of your
 categories.}
