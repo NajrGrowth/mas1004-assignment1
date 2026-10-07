@@ -80,18 +80,17 @@ clean & ImageNet & all layers & 10 & 0.0001 & 11,178,564 & 100.0\% & 97.2\% \\
 
 \picturefile{figures/run_curves.png}
 
-\fillin{Did the loss go down? Did it keep going down, or flatten out?}
+The training loss went down fast, from 0.93 in epoch 1 to 0.20 in epoch 2, and then kept slowly going down to 0.04. The test loss leveled off around 0.52--0.57 from epoch 2 onward and stayed roughly flat for the rest of training, while test accuracy settled around 83--85\%. The epochs20 run shows the same pattern continuing: the extra 10 epochs added only 2.5 percentage points of test accuracy (85.8\% vs.\ 83.3\%), while test loss kept slowly creeping upward from about 0.53 to 0.60 --- the model was no longer learning anything generalizable, just slightly overfitting further.
 
-\fillin{The gap between train and test accuracy, and what it means.}
+The main run reached 98.8\% train accuracy but only 83.3\% test accuracy, a 15.5-point gap. The model learns the 480 training images almost perfectly, but does worse on images it has not seen. This is overfitting: with so few images, it partly memorizes them.
 
 \begin{center}\picturefile[0.5\linewidth]{figures/run_confusion.png}\end{center}
 
-\fillin{Which two categories it mixes up most, and whether that surprised you.}
+For the main run, the most common mistakes are Back Lat Spread misclassified as Back Double Biceps (4 images) and Side Chest misclassified as either Back Lat Spread or Side Triceps (4 images each). This does not surprise me: Back Lat Spread and Back Double Biceps share the same back-to-camera orientation, matching my original guess that orientation is an easier signal than exact arm position. The Side Chest confusion is more interesting --- it is genuinely visually close to both Side Triceps (same sideways orientation) and, apparently, Back Lat Spread, which I had not expected and suggests lighting or body outline may be playing a bigger role than I assumed.
 
-\fillin{How far apart the test accuracies are, starting from ImageNet and from
-random numbers, and why you think that is.}
+Starting from ImageNet weights reached 83.3\% test accuracy, while starting from random weights reached only 45.8\% --- a 37.5 percentage point gap. The random-weights model essentially collapsed into predicting mostly one class (it called 21 of 30 Back Lat Spread test images ``Back Double Biceps''), showing it could not learn useful general features from only 480 training images, while the pretrained model could still adapt its existing visual knowledge to the task.
 
-\fillin{How close training only the last layer gets to training all of them.}
+Training only the last layer updates just 2,052 of 11,178,564 parameters (about 0.018\%), yet reaches 75.8\% test accuracy, compared to 83.3\% for training every parameter. Measured against the random-weights baseline (45.8\%), the frozen run recovers $(75.8 - 45.8) / (83.3 - 45.8) \approx 80\%$ of the total possible improvement while touching almost none of the network.
 
 \subsection*{Output of the runs}
 \outputfile{outputs/run_output.txt}
