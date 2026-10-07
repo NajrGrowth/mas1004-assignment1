@@ -396,10 +396,15 @@ The model's answers below are from \texttt{results/problem7\_guess2.txt}.
 
 \subsection*{Guess 3}
 
-\fillin{The guess, and what in your images or your model's mistakes made you
-think of it.}
+\textbf{My guess:} the bigger drop with the arms covered was caused by the arms themselves, not by the bigger covered area. If I cover a tall block in the middle of the body, from the top of the head to the waist, with the same area as the two arm blocks together the drop will be smaller.
 
-\fillin{The change you chose, and why it tests the guess.}
+\textbf{Prediction:} the average certainty for back\_double\_biceps will stay above the 48.1\% from the arms test, and fewer than 2 of the 7 images will change class.
+
+\textbf{Why:} In guess 1 and 2 the blocks differed in size, so I could not tell if the arms or the area caused the drop. With the same area as the arm blocks, that doubt is gone. I put it in the middle of the body, where the arms are not.
+
+The block was too wide and it would overlap with the shoulders and a part of the arms so extra prompt.
+
+This also did not really work, as now there was no space left for the control block on 5/7 pictures, and on the other 2 the blocks go outside of the photo. Therefore I sent this prompt.
 
 My requests to the agent, word for word, in order:
 \begin{quote}
@@ -493,12 +498,19 @@ The model's answers below are from \texttt{results/problem7\_guess3.txt}.
 \outputfile{outputs/problem7_samearea.txt}
 \outputfile{outputs/problem7_guess3.txt}
 
-\fillin{What the results say about the guess.}
+\textbf{Results:} covering the same area in the middle of the body gives a certainty of 71.1\%, while covering the arms gives 48.1\%. The grey block in the last round also covered 5.7\% to 31.1\% of the arm/shoulder area, this should work against my guess but still the difference stays big.
+
+\textbf{What I think the model uses:} my prediction came true, 71.1\% compared to 48.1\%, and 1 of 7 images changed class instead of 2. This suggests that the arms count for more than their area alone. But the middle block still hurts the model, which means it is not only the arms.
+
+\textbf{How sure I am:} I am fairly sure that the arms matter more than the area alone, because the gap in score is large and the control stays similar. I am not fully sure how much the rest of the body matters, but I did cover the arms, upper back and the middle of the body. Yet I would not claim exact numbers.
+
+\textbf{Limits:} the control group did only exist out of 5 images, this was because IMG\_1481 was only 9\% visible and IMG\_2359 35\%. Also one of the images left a small part (16\%) of the head outside of the square.
 
 
 \subsection*{What I now think the model uses}
-\fillin{What you now think the model uses to tell your categories apart, and
-how sure you are.}
+What I now think the model uses after all 3 guesses, is that the arms are most likely the most important part. Covering the arms lowered the mean certainty for back\_double\_biceps the most (98.1\% to 48.1\%). Covering the same area in the middle of the body lowered it less (71.1\%), and covering the upper back, with a block about half as big, lowered it the least (83.9\%). The controls hardly changed anything (95.7\%, 98.1\% and 98.4\%), so a grey block on its own does not confuse the model. I think the model mostly uses the raised, bent arms and how they sit next to the body. This fits my guess from before the training. The rest of the body also matters, because the same-area block in the middle still cost quite some points, but less than the arms. The upper back, the V-shape, seems to play a smaller role than I thought at first.
+
+I am fairly sure that the arms matter more than the area alone, because the gap is large and the controls stay similar. I am less sure how much the back matters by itself, because the back block was smaller and the middle block overlapped the arm blocks in all 7 images. I tested 7 images and one model, I did not cover several body parts at once, and the blocks were placed by eye, so I would not claim exact numbers.
 
 % ---------------------------------------------------------------------------
 \section*{Appendix. Output of check.py}
