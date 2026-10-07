@@ -186,8 +186,11 @@ ways: the cleaning, and the 28 back\_lat\_spread images added after it from a
 second download. So this comparison shows the effect of both together, not of
 cleaning alone.
 
-\fillin{The test accuracy and the accuracy on your new images, before and
-after. If a number went down, why you think it did.}
+Before cleaning, the first model (\texttt{run}) reached 83.3\% on its test set of 120 downloaded images and 92.9\% (26/28) on my new images. After cleaning, the clean model reached 97.2\% on its test set of 72 images and 96.4\% (27/28) on my new images.
+
+The two test accuracies are measured on different test sets: the first one still contained junk and near-duplicates, the second one only cleaned images, so they cannot be compared directly. My own new images are the same 28 images for both models, so that is the fairer comparison, and there the difference is one image. Cleaning was also not the only change: 59 extra back\_lat\_spread images were added from a second download, of which 28 were left after cleaning. With only 28 images, the result can also change by a few images between training runs, so a one-image difference is within that range.
+
+I think the cleaning is the main reason for the better results, because there was less nonsense and mostly good photos, but I cannot be sure it is the only reason.
 
 % ---------------------------------------------------------------------------
 \section*{Problem 5. Images from a new source}
