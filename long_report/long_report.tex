@@ -217,24 +217,273 @@ categories.}
 % ---------------------------------------------------------------------------
 \section*{Problem 7. What the model looks at}
 
-% Copy this subsection once for every guess.
+% Three pictures next to each other, each at most 6 cm high, each with a line
+% of text under it: original, changed, control.
+\newcommand{\threeone}[2]{%
+  \begin{minipage}[t]{0.32\linewidth}\centering
+    \IfFileExists{#1}{\includegraphics[width=\linewidth,height=6cm,keepaspectratio]{#1}}%
+      {\picturefile{#1}}\par\small #2
+  \end{minipage}}
+\newcommand{\threeside}[6]{%
+  \par\noindent\threeone{#1}{#2}\hfill\threeone{#3}{#4}\hfill\threeone{#5}{#6}\par\medskip}
+
 \subsection*{Guess 1}
+
+\textbf{Guess:} the model chooses back\_double\_biceps based on both arms being up and bent, this is because this is the thing most differentiating from all of the other poses, and also the most recognizable of the back double biceps pose.
+
+\textbf{Prediction:} when the arms are blocked off, the model is less certain about it being back\_double\_biceps.
+
+\textbf{Why:} I chose to cover the arms because this is the most recognizable and differentiating thing about the back double biceps pose. Also because I once put a picture of a front double biceps pose into it and it was 99.1\% certain that it was a back double biceps pose (this came from the demo page, not the code output).
+
+My requests to the agent, word for word, in order:
+\begin{quote}
+\begin{Verbatim}[breaklines, fontsize=\small]
+For each image in data/new_images/back_double_biceps, make two copies:
+1. One with a plain grey rectangle covering both of the person's arms.
+   Save in data/changed/bdb_arms_covered.
+2. One with a plain grey rectangle of the same size covering a part that is
+   not the arms (for example the lower back). Save in
+   data/changed/bdb_control_covered.
+Do not change the originals. Show me one example of each so I can check where
+the blocks are.
+\end{Verbatim}
+\end{quote}
+\begin{quote}
+\begin{Verbatim}[breaklines, fontsize=\small]
+Run the original, arms-covered and control versions of all 7 back double biceps
+images through the clean model, prepared the same way as in training. For each
+image print the probability for all four classes. Save the output in
+results/problem7_guess1.txt and copy it to long_report/outputs/.
+\end{Verbatim}
+\end{quote}
+\begin{quote}
+\begin{Verbatim}[breaklines, fontsize=\small]
+Please add to src/problem7_predict.py a line per folder that prints the mean
+probability of each class over all images, then rerun it for the three back
+double biceps folders and save the output again in results/problem7_guess1.txt
+and long_report/outputs/.
+\end{Verbatim}
+\end{quote}
+
+The model's answers below are from \texttt{results/problem7\_guess1.txt}.
+
+\threeside{figures/p7_original_IMG_2306.png}{original: back\_double\_biceps 99.1\%}
+           {figures/p7_g1_arms_IMG_2306.png}{arms covered: back\_double\_biceps 71.7\%}
+           {figures/p7_g1_control_IMG_2306.png}{control: back\_double\_biceps 95.5\%}
+
+\threeside{figures/p7_original_IMG_9293.jpeg}{original: back\_double\_biceps 95.5\%}
+           {figures/p7_g1_arms_IMG_9293.jpeg}{arms covered: side\_triceps 54.7\% (back\_double\_biceps 5.4\%)}
+           {figures/p7_g1_control_IMG_9293.jpeg}{control: back\_double\_biceps 97.8\%}
+
+\threeside{figures/p7_original_IMG_0512.jpeg}{original: back\_double\_biceps 98.8\%}
+           {figures/p7_g1_arms_IMG_0512.jpeg}{arms covered: side\_triceps 46.3\% (back\_double\_biceps 41.2\%)}
+           {figures/p7_g1_control_IMG_0512.jpeg}{control: back\_double\_biceps 94.0\%}
+
+\outputfile{outputs/problem7_guess1.txt}
+
+\textbf{Results:} my prediction was pretty accurate. For the original photos the model was on average 98.1\% certain of it being back double biceps. For the photos with the arms covered, the model was on average 48.1\% certain, with 2 of the images being mistaken for side triceps. The spreading is pretty big, the lowest certainty was 5.4\% and the highest 71.7\%. And for the control covered group, the model was on average 95.7\% certain. (I asked Claude Code to calculate these average percentages.)
+
+\textbf{What I think the model uses (after 1 guess):} I think the arm position is one of the model's most important points for back\_double\_biceps. Covering both arms dropped its average certainty from 98.1\% to 48.1\%, while covering the lower back almost didn't change it (95.7\%). Also, the demo page was 99.1\% sure that a front double biceps photo was a back double biceps. The arm position and silhouette are very similar, and only the direction you face differs.
+
+\textbf{How sure I am:} pretty sure the arms matter, but I am not 100\% positive that it is the most important clue. With the arms covered still 5 of the 7 images were classified as back\_double\_biceps.
+
+\textbf{Next guess:} besides the blocks on the arms I also think the machine looks at the upper back and V shape of the body, so my next guess is that if you just cover the upper back and shoulders, and not the arms, the model will also be less certain of it being a back double biceps.
+
+\subsection*{Guess 2}
 
 \fillin{The guess, and what in your images or your model's mistakes made you
 think of it.}
 
 \fillin{The change you chose, and why it tests the guess.}
 
-My request to the agent, word for word:
+My requests to the agent, word for word, in order:
 \begin{quote}
-\fillin{the request}
+\begin{Verbatim}[breaklines, fontsize=\small]
+For each image in data/new_images/back_double_biceps, make two copies:
+
+1. One with a plain grey block covering the upper back and shoulders (the area
+between and around the shoulder blades, up to the base of the neck). The block
+must NOT overlap the arm areas I covered in guess 1, so the arms stay visible.
+Save in data/changed/bdb_upperback_covered.
+
+2. One control copy with a plain grey block of exactly the same size, placed on
+a part that is neither the upper back, the shoulders nor the arms (for example
+the waist and hips). Save in data/changed/bdb_upperback_control.
+
+Place both blocks so that they are as much as possible inside the centre square
+that the model sees, and tell me for each image how much of each block is inside
+it. Do not change the originals. Show me one example of each before saving the
+rest, so I can check where the blocks are.
+
+Then run src/problem7_predict.py on these folders: the originals,
+data/changed/bdb_arms_covered, data/changed/bdb_upperback_covered and
+data/changed/bdb_upperback_control. Print the probability for all four classes
+per image and the mean per folder. Save the output in
+results/problem7_guess2.txt and copy it to long_report/outputs/.
+\end{Verbatim}
+\end{quote}
+\begin{quote}
+\begin{Verbatim}[breaklines, fontsize=\small]
+The guess 2 example is not good. The upper back block is off-centre (it sits to
+the left of the spine) and covers too little, and the control block sits too
+close to the lower back. Please redo both:
+
+1. Upper back block: centred on the middle of the body (below the head),
+covering the whole back from the base of the neck down to the waist, and wide
+enough to go from one armpit to the other, so the shoulder blades and the sides
+of the back (the V-shape) are covered. Keep the raised arms visible (upper
+arms, elbows, fists). Save in data/changed/bdb_upperback_covered.
+
+2. Control block: exactly the same size, on a part of the image that is clearly
+not the back and not the arms, for example the background beside the waist and
+hips, or the trousers and legs, and not touching the lower back. Choose the
+position per image and tell me where it is. Save in
+data/changed/bdb_upperback_control.
+
+Do not save anything yet. First show me one preview sheet with outlines of both
+blocks on all 7 images (not just one example), and for each block how much of
+it is inside the centre square that the model sees.
+\end{Verbatim}
+\end{quote}
+\begin{quote}
+\begin{Verbatim}[breaklines, fontsize=\small]
+The preview looks right. For IMG_1481, go with option 2: use it for the back
+block test, but leave its control out of the control means, and show that
+clearly in the output. Save both folders for all 7 images, then run
+problem7_predict.py on the four folders (originals, arms covered, back covered,
+back control) into results/problem7_guess2.txt. Print the means per folder over
+all 7 images, and also over the 6 images that have a usable control
+(without IMG_1481). Copy the output to long_report/outputs/.
+\end{Verbatim}
 \end{quote}
 
-% One \sidebyside for every image you changed.
-\sidebyside{figures/guess1_original_1.jpg}{\fillin{original: the model's answer}}
-           {figures/guess1_changed_1.jpg}{\fillin{changed: the model's answer}}
+The model's answers below are from \texttt{results/problem7\_guess2.txt}.
+
+\threeside{figures/p7_original_IMG_2306.png}{original: back\_double\_biceps 99.1\%}
+           {figures/p7_g2_back_IMG_2306.png}{back covered: back\_double\_biceps 93.3\%}
+           {figures/p7_g2_control_IMG_2306.png}{control: back\_double\_biceps 98.9\%}
+
+\threeside{figures/p7_original_IMG_9293.jpeg}{original: back\_double\_biceps 95.5\%}
+           {figures/p7_g2_back_IMG_9293.jpeg}{back covered: back\_double\_biceps 79.4\%}
+           {figures/p7_g2_control_IMG_9293.jpeg}{control: back\_double\_biceps 97.3\%}
+
+\threeside{figures/p7_original_IMG_0512.jpeg}{original: back\_double\_biceps 98.8\%}
+           {figures/p7_g2_back_IMG_0512.jpeg}{back covered: back\_double\_biceps 67.9\%}
+           {figures/p7_g2_control_IMG_0512.jpeg}{control: back\_double\_biceps 98.5\%}
+
+\outputfile{outputs/problem7_guess2.txt}
 
 \fillin{What the results say about the guess.}
+
+\subsection*{Guess 3}
+
+\fillin{The guess, and what in your images or your model's mistakes made you
+think of it.}
+
+\fillin{The change you chose, and why it tests the guess.}
+
+My requests to the agent, word for word, in order:
+\begin{quote}
+\begin{Verbatim}[breaklines, fontsize=\small]
+Please print, for each image, the area in pixels of the two arm blocks together
+(guess 1) and of the back block (guess 2), and the ratio between them. Save it in
+results/problem7_block_sizes.txt and copy it to long_report/outputs/.
+\end{Verbatim}
+\end{quote}
+\begin{quote}
+\begin{Verbatim}[breaklines, fontsize=\small]
+For each image in data/new_images/back_double_biceps, make two copies:
+
+1. One with a single plain grey rectangle whose area is equal to the two guess 1
+arm blocks together (use the pixel areas in src/problem7_block_sizes.py, within
+1%). Make it tall: centred on the spine, from the top of the head downwards
+over the neck and back. Save in data/changed/bdb_samearea_covered.
+
+2. One control copy with a grey rectangle of exactly the same size and shape,
+on a part of the image that is clearly not the body (background or trousers).
+Choose the position per image and tell me where it is. Save in
+data/changed/bdb_samearea_control.
+
+Keep both blocks as much as possible inside the centre square that the model
+sees, and tell me per image how much of each block is inside it. Do not change
+the originals. Do not save anything yet: first show me one preview sheet with
+outlines of both blocks on all 7 images. If a control block does not fit on an
+image, tell me instead of moving it somewhere else.
+
+Then add the new block positions to a script in src/ (so the areas come from
+code in git), run src/problem7_predict.py on the originals, arms covered,
+same-area covered and same-area control, and print per-image probabilities and
+the mean per folder into results/problem7_guess3.txt. Copy it to
+long_report/outputs/.
+\end{Verbatim}
+\end{quote}
+\begin{quote}
+\begin{Verbatim}[breaklines, fontsize=\small]
+Make the same-area block narrow enough so it does NOT overlap the guess 1 arm
+blocks (keep the area equal to the two arm blocks, within 1%). It will be longer
+and may go onto the trousers, that is fine. Keep it centred on the spine, starting
+at the top of the head. Re-plan the control blocks for this new shape. For every
+image print how much of the covered block and of the control block is inside
+the centre square the model sees. Do not save anything yet: show me a new
+preview of all 7 images first. If the covered block is mostly outside the
+model's view for several images, tell me instead of changing it.
+\end{Verbatim}
+\end{quote}
+\begin{quote}
+\begin{Verbatim}[breaklines, fontsize=\small]
+Go back to the first plan: same area as the two arm blocks (within 1%), centred
+on the spine, from the top of the head down to the waist, so it may overlap the
+guess 1 arm blocks. Use the control positions from that first plan. Leave the
+controls of IMG_1481 and IMG_2359 out of the control means (print their answers,
+marked), as in guess 2. Put the block positions in a script in src/ and make it
+print per image the area, how much of each block is inside the model's view, and
+the overlap with the arm blocks in pixels and as a share of the arm area. Show
+me the final preview of all 7 images before saving anything. Then save both
+folders, run problem7_predict.py on the originals, arms covered, same-area
+covered and same-area control, and save the output in
+results/problem7_guess3.txt and long_report/outputs/.
+\end{Verbatim}
+\end{quote}
+\begin{quote}
+\begin{Verbatim}[breaklines, fontsize=\small]
+Yes, go ahead. Save the two folders with --write and check the originals are
+unchanged. Run problem7_predict.py on the originals, arms covered, same-area
+covered and same-area control. Mark the controls of IMG_1481 and IMG_2359 and
+leave them out of the control means (print their answers anyway). Save the
+output in results/problem7_guess3.txt and copy it to long_report/outputs/.
+Then show me the means per folder and how many of the 7 images change class.
+\end{Verbatim}
+\end{quote}
+\begin{quote}
+\begin{Verbatim}[breaklines, fontsize=\small]
+Yes. Add a line per folder to problem7_predict.py that prints how many images
+change class, and rerun guess 3 into results/problem7_guess3.txt (and copy it
+to long_report/outputs/). Save the table from problem7_samearea.py to
+results/problem7_samearea.txt and copy it to long_report/outputs/. Then commit
+src/problem7_samearea.py and these outputs and push.
+\end{Verbatim}
+\end{quote}
+
+The model's answers below are from \texttt{results/problem7\_guess3.txt}.
+
+\threeside{figures/p7_original_IMG_2306.png}{original: back\_double\_biceps 99.1\%}
+           {figures/p7_g3_samearea_IMG_2306.png}{same area covered: back\_double\_biceps 87.3\%}
+           {figures/p7_g3_control_IMG_2306.png}{control: back\_double\_biceps 99.0\%}
+
+\threeside{figures/p7_original_IMG_9293.jpeg}{original: back\_double\_biceps 95.5\%}
+           {figures/p7_g3_samearea_IMG_9293.jpeg}{same area covered: back\_lat\_spread 43.9\% (back\_double\_biceps 38.3\%)}
+           {figures/p7_g3_control_IMG_9293.jpeg}{control: back\_double\_biceps 98.2\%}
+
+\threeside{figures/p7_original_IMG_0512.jpeg}{original: back\_double\_biceps 98.8\%}
+           {figures/p7_g3_samearea_IMG_0512.jpeg}{same area covered: back\_double\_biceps 66.3\%}
+           {figures/p7_g3_control_IMG_0512.jpeg}{control: back\_double\_biceps 98.4\%}
+
+\outputfile{outputs/problem7_block_sizes.txt}
+\outputfile{outputs/problem7_samearea.txt}
+\outputfile{outputs/problem7_guess3.txt}
+
+\fillin{What the results say about the guess.}
+
 
 \subsection*{What I now think the model uses}
 \fillin{What you now think the model uses to tell your categories apart, and
