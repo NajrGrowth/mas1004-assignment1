@@ -1,0 +1,12 @@
+guess 3: covered block (same area as both arm blocks, spine-centred, top of head to waist) and control block
+
+  image            arm area      block       area    diff  covered in view  control in view      overlap with arms  control position
+  IMG_0512.jpeg     144,677    285x507    144,495  -0.13%              96%             100%       8,200 px   5.7%  below the waist
+  IMG_0513.PNG      130,002    302x430    129,860  -0.11%             100%             100%      28,764 px  22.1%  below the waist
+  IMG_1481.PNG      308,415    437x706    308,522  +0.03%             100%               9%      56,985 px  18.5%  below the waist
+  IMG_2234.PNG      295,680    426x694    295,644  -0.01%             100%              92%      55,440 px  18.8%  left of the body
+  IMG_2306.PNG      263,725    436x605    263,780  +0.02%             100%              84%      70,875 px  26.9%  left of the body
+  IMG_2359.PNG      259,198    416x623    259,168  -0.01%             100%              35%      72,570 px  28.0%  below the waist
+  IMG_9293.jpeg   2,424,438  1327x1827  2,424,429  -0.00%              84%              77%     754,353 px  31.1%  below the waist
+
+  overlap with arms: pixels of the covered block inside the guess 1 arm blocks, and that as a share of the arm area

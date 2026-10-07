@@ -7,7 +7,8 @@ Usage:
 For every image name found in the first folder, prints the model's softmax
 probability for each class on that image in every folder, prepared with
 prepare_image exactly as in training. At the end, one line per folder with the
-mean probability of each class over the images in it.
+mean probability of each class over the images in it, and per folder how many
+images got a different answer than the same image in the first folder.
 
     --leave-out data/changed/some_folder/IMG_1.PNG
         prints that image's answers but leaves it out of its folder's means
@@ -63,6 +64,7 @@ def main():
     width = max(len(str(f)) for f in folders)
     header = f"  {'folder':{width}s}  " + "  ".join(f"{c:>18s}" for c in class_names) + "  answer"
     collected = {folder: [] for folder in folders}
+    answers = {folder: {} for folder in folders}
     for name in names:
         print(name)
         print(header)
@@ -77,6 +79,7 @@ def main():
             probs = np.exp(logits - logits.max())
             probs /= probs.sum()
             mark = " *" if path in left_out else ""
+            answers[folder][name] = int(probs.argmax())
             if not mark:
                 collected[folder].append((name, probs))
             cells = "  ".join(f"{p:18.1%}" for p in probs)
@@ -86,10 +89,25 @@ def main():
     print_means("mean probability over the images in each folder"
                 + (" (without the ones marked *)" if left_out else ""),
                 collected, class_names, width, set())
+    print()
+    print_changes(answers, folders, width, left_out)
     if args.also_without:
         print()
         print_means("mean probability without " + ", ".join(args.also_without),
                     collected, class_names, width, set(args.also_without))
+
+
+def print_changes(answers, folders, width, left_out):
+    first = answers[folders[0]]
+    print(f"images whose answer differs from the answer on the same image in {folders[0]}")
+    print(f"  {'folder':{width}s}  changed  of")
+    for folder in folders[1:]:
+        names = [n for n in answers[folder] if n in first]
+        changed = [n for n in names if answers[folder][n] != first[n]]
+        marked = sum(folder / n in left_out for n in names)
+        note = f"   (includes {marked} marked *)" if marked else ""
+        print(f"  {str(folder):{width}s}  {len(changed):7d}  {len(names):2d}{note}"
+              + (f"   {', '.join(changed)}" if changed else ""))
 
 
 def print_means(title, collected, class_names, width, without):
