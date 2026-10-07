@@ -363,6 +363,13 @@ all 7 images, and also over the 6 images that have a usable control
 (without IMG_1481). Copy the output to long_report/outputs/.
 \end{Verbatim}
 \end{quote}
+\begin{quote}
+\begin{Verbatim}[breaklines, fontsize=\small]
+Please print, for each image, the area in pixels of the two arm blocks together
+(guess 1) and of the back block (guess 2), and the ratio between them. Save it in
+results/problem7_block_sizes.txt and copy it to long_report/outputs/.
+\end{Verbatim}
+\end{quote}
 
 The model's answers below are from \texttt{results/problem7\_guess2.txt}.
 
@@ -379,8 +386,13 @@ The model's answers below are from \texttt{results/problem7\_guess2.txt}.
            {figures/p7_g2_control_IMG_0512.jpeg}{control: back\_double\_biceps 98.5\%}
 
 \outputfile{outputs/problem7_guess2.txt}
+\outputfile{outputs/problem7_block_sizes.txt}
 
-\fillin{What the results say about the guess.}
+\textbf{Results:} My prediction was partly right. The certainty dropped, from 98.1\% to 83.9\% (84.1\% without IMG\_1481) and the drop was smaller than with the arms being covered (48.1\%). But I expected the model to only be a bit more certain than with the arms covered, and the difference is actually large. None of the 7 images changed class and the values ranged from 67.9\% to 93.3\%. The control stayed at 98.1\%. The back block covered less area than the two arm blocks together on every image (between 0.39 and 0.74 times as much, see \texttt{results/problem7\_block\_sizes.txt}). Still, the much smaller drop suggests that the arms matter more than the back.
+
+\textbf{What I think the model uses:} I still believe the model focuses mostly on the arms, but the upper back still plays a role too.
+
+\textbf{How sure I am:} I am fairly sure that covering the arms had a bigger effect than covering the back for these 7 images. I cannot say that the arms matter more by themselves, because the blocks were not equally large. I also did not cover the arms and back together, and I tested only 7 images and one model. The control for IMG\_1481 was left out (16\% of its block was inside the model's view), the control for IMG\_2359 was only 67\% inside it, and for three images the control block lay on a dark background.
 
 \subsection*{Guess 3}
 
@@ -390,13 +402,6 @@ think of it.}
 \fillin{The change you chose, and why it tests the guess.}
 
 My requests to the agent, word for word, in order:
-\begin{quote}
-\begin{Verbatim}[breaklines, fontsize=\small]
-Please print, for each image, the area in pixels of the two arm blocks together
-(guess 1) and of the back block (guess 2), and the ratio between them. Save it in
-results/problem7_block_sizes.txt and copy it to long_report/outputs/.
-\end{Verbatim}
-\end{quote}
 \begin{quote}
 \begin{Verbatim}[breaklines, fontsize=\small]
 For each image in data/new_images/back_double_biceps, make two copies:
@@ -485,7 +490,6 @@ The model's answers below are from \texttt{results/problem7\_guess3.txt}.
            {figures/p7_g3_samearea_IMG_0512.jpeg}{same area covered: back\_double\_biceps 66.3\%}
            {figures/p7_g3_control_IMG_0512.jpeg}{control: back\_double\_biceps 98.4\%}
 
-\outputfile{outputs/problem7_block_sizes.txt}
 \outputfile{outputs/problem7_samearea.txt}
 \outputfile{outputs/problem7_guess3.txt}
 
