@@ -34,12 +34,16 @@
 apart: shape, colour, texture, background, or something else.}
 
 \subsection*{Images per category}
-\fillin{How many images you got for each category.}
+I downloaded 150 images for each category. For back\_lat\_spread I later
+downloaded 59 more (Problem 4), so 209 in total, 659 for all four categories.
+After cleaning, 361 were left: back\_double\_biceps 114, back\_lat\_spread 85,
+side\_chest 86 and side\_triceps 76. The full count, as \texttt{clean.py count}
+printed it, is in \texttt{outputs/clean\_count.txt}, shown under Problem 4.
 
 % ---------------------------------------------------------------------------
 \section*{Problem 2. Preparing an image}
 
-\sidebyside{figures/prepare_original.jpg}{\fillin{the image as downloaded}}
+\sidebyside{figures/prepare_original.png}{\fillin{the image as downloaded}}
            {figures/prepare_result.png}{\fillin{what prepare\_image made of it}}
 
 \fillin{What was cut off, and an image where the crop cut off part of the
@@ -199,7 +203,7 @@ distance, what else is in the frame.}
 % ---------------------------------------------------------------------------
 \section*{Problem 6. The demo}
 
-Address: \fillin{your GitHub Pages address}
+Address: \url{https://najrgrowth.github.io/mas1004-assignment1/}
 
 \sidebyside{figures/demo_front_double_biceps.png}
            {A front double biceps pose, which is none of my categories. The
@@ -291,10 +295,13 @@ The model's answers below are from \texttt{results/problem7\_guess1.txt}.
 
 \subsection*{Guess 2}
 
-\fillin{The guess, and what in your images or your model's mistakes made you
-think of it.}
+\textbf{Guess:} The model chooses back\_double\_biceps based on the back (the upper back, the shoulder blades and the sides of the back, which make the V-shape). If the back is covered while the arms stay visible, the model will be less certain that it is a back\_double\_biceps pose.
 
-\fillin{The change you chose, and why it tests the guess.}
+\textbf{Prediction:} When the upper part of the back is covered, the model will be less certain about it being back\_double\_biceps, I do think the model will still be a bit more certain than it was with the arms being blocked off, this is because the model will probably still see the back as a certain shape going together with the back double biceps pose.
+
+\textbf{Why:} I chose to cover this part of the body because the V-shape is a very recognizable part of the back double biceps pose and it is also not seen in other poses besides the back lat spread. I also chose it because the model was still 5/7 times correct when covering just the arms.
+
+\textbf{What went wrong and my second request:} The first example was off-centre and covered too little, and the control block was too close to the lower back. So I asked for a redo.
 
 My requests to the agent, word for word, in order:
 \begin{quote}
