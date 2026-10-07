@@ -27,18 +27,30 @@
 \section*{Problem 1. Categories and images}
 
 \subsection*{Why these categories}
-\fillin{Why these categories, and why you care about them.}
+I chose these four poses because I am genuinely interested in bodybuilding as a sport and train regularly myself. I plan to compete in a bodybuilding competition in the future, which means learning to pose correctly is directly relevant to me. Beyond this assignment, I want to eventually develop this project further into a tool that helps bodybuilders improve their own posing, so starting with a classifier that can reliably tell different poses apart is a natural first step toward that goal.
 
 \subsection*{What I expected the model to use}
-\fillin{What you thought, before training, the model would use to tell them
-apart: shape, colour, texture, background, or something else.}
+My guess is that the model will mainly use the overall arm silhouette and body orientation (sideways vs.\ back turned) rather than fine muscular detail. Side Chest and Side Triceps both show the body turned sideways, but differ in where the arms are held (one arm across the chest vs.\ both arms behind the back), while Back Double Biceps and Back Lat Spread both show the back turned to the camera but differ in arm position (raised and bent vs.\ spread wide at the sides). Since the training images come from a web search and therefore vary a lot in lighting, body type, and photo quality, I expect arm position and overall body outline to be a more consistent signal than finer details like specific muscle definition.
 
 \subsection*{Images per category}
-I downloaded 150 images for each category. For back\_lat\_spread I later
-downloaded 59 more (Problem 4), so 209 in total, 659 for all four categories.
-After cleaning, 361 were left: back\_double\_biceps 114, back\_lat\_spread 85,
-side\_chest 86 and side\_triceps 76. The full count, as \texttt{clean.py count}
-printed it, is in \texttt{outputs/clean\_count.txt}, shown under Problem 4.
+\begin{center}
+\begin{tabular}{lrr}
+\toprule
+Category & Downloaded (data/raw) & After cleaning (data/clean) \\
+\midrule
+Side Chest & 150 & 86 \\
+Side Triceps & 150 & 76 \\
+Back Double Biceps & 150 & 114 \\
+Back Lat Spread & 209 & 85 \\
+\midrule
+\textbf{Total} & \textbf{659} & \textbf{361} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Images were collected using the assignment's downloader. DuckDuckGo returned no results for any category, so all images came from Bing. Bing returned more than enough candidate links to reach the target of 150 per class. For Side Chest and Side Triceps specifically, the initial search phrases (just the category name) returned mostly irrelevant images: ``side chest'' matched furniture (storage chests/drawers) and medical ``chest pain'' graphics far more often than bodybuilding poses, and ``side triceps'' mostly returned gym stock photos and exercise diagrams. I re-collected both categories using the more specific phrases ``side chest pose bodybuilding competition'' and ``side triceps pose bodybuilding competition'', which fixed the problem: around 130/150 and 125/150 (counted by eye) of the new images respectively show real posing photos. Back Double Biceps and Back Lat Spread did not have this issue and were not re-collected. The table above reflects the final, corrected image counts (150 per category for the first download, and 209 for Back Lat Spread after the extra download in Problem 4).
+
+The full count, as \texttt{clean.py count} printed it, is in \texttt{outputs/clean\_count.txt}, shown under Problem 4.
 
 % ---------------------------------------------------------------------------
 \section*{Problem 2. Preparing an image}
