@@ -55,11 +55,11 @@ The full count, as \texttt{clean.py count} printed it, is in \texttt{outputs/cle
 % ---------------------------------------------------------------------------
 \section*{Problem 2. Preparing an image}
 
-\sidebyside{figures/prepare_original.png}{\fillin{the image as downloaded}}
-           {figures/prepare_result.png}{\fillin{what prepare\_image made of it}}
+The example below uses \texttt{data/raw/back\_lat\_spread/0090.jpg}, which shows two bodybuilders from behind, side by side. I later removed this image from the cleaned data as a wrong pose, but it still shows clearly what the crop does. Because prepare\_image resizes the shorter side to 256 and then takes a 224$\times$224 center crop, it keeps only about 38\% of the original image's area. In this case, the crop cuts off the outer arm and the outer lat of each physique --- exactly the parts that make this pose a lat spread in the first place, since the pose is defined by how wide the arms and lats extend to the sides rather than by what is visible in the center of the frame.
 
-\fillin{What was cut off, and an image where the crop cut off part of the
-thing you care about.}
+\sidebyside{figures/prepare_original_box.png}{the image as downloaded}
+           {figures/prepare_result_panel.png}{what prepare\_image made of it}
+
 
 % ---------------------------------------------------------------------------
 \section*{Problem 3. First training runs}
