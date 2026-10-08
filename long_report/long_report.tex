@@ -212,7 +212,7 @@ my new images (\texttt{check.txt}) & 28 & 96.4\% (27/28) \\
 
 The two accuracies differ by 0.8 percentage points, which is less than one image: with 28 images, one image changes the percentage by about 3.6 points.
 
-\fillin{Why it did not get worse on my new images.}
+I expected my own photos to do similar to the downloaded photos, if not better (which was in this case really hard, because the model only made 2 mistakes on the downloads). I expected this because I think my pictures were very good: the angles are all quite similar, the backgrounds are very basic, the lighting is good enough to see the pose clearly, although the locker room is darker than the gym, and I am the only person and the main point in the photos. Overall I think my pictures were just good and clear representations of the poses.
 
 The five mistakes below come from two models. The first three are from the clean model, the one on the web page; it made only these three mistakes, one on my new images and two on its test set. The last two are from the \texttt{run} model, which was trained before cleaning. Of the \texttt{run} model's 10 most confident mistakes on its test set, 9 were on images I removed later while cleaning. The numbers come from \texttt{src/problem5\_mistakes.py}, whose output is below.
 
@@ -251,8 +251,7 @@ The five mistakes below come from two models. The first three are from the clean
 
 \outputfile{outputs/problem5_mistakes.txt}
 
-\fillin{What is different about your new images: background, lighting, angle,
-distance, what else is in the frame.}
+I think many of the downloads are competition photos with stages or photos in the middle of the gym, while mine have gym and locker-room backgrounds, and I am the only person in the frame. The only mistake the model made on my pictures was a picture taken in the middle of the gym (\texttt{IMG\_2482}), which I think means that there was a lot more distraction and other objects in the photo, definitely compared to the other photos, which were mostly all taken in the darker locker room.
 
 % ---------------------------------------------------------------------------
 \section*{Problem 6. The demo}
