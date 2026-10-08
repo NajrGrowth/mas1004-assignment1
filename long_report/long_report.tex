@@ -242,7 +242,12 @@ the photo, and the centre square the model sees
 \mistake{figures/p5_mistake3_side_triceps_0031.jpg}
   {\textbf{3. Clean model, test set} \texttt{side\_triceps/0031.jpg}: said side\_chest, 53.6\% sure; really side\_triceps. A black-and-white close-up of a smiling bodybuilder turned sideways, from the waist up.
 
-  \fillin{What pushed the model the wrong way.}}
+  I think the model got this wrong because the photo is taken from very close and stops at the waist, so the arm behind the back and the hands are not visible at all. The position of the arm is the biggest difference between a side chest and a side triceps, so without it the model mostly sees a large chest and shoulder, which I think looks like a side chest. The centre crop of prepare\_image only removes a thin strip (the top of the head and the wrist), so unlike in mistake 2 the crop is not the problem here. The model was not very sure (53.6\%). The photo is also black and white but I do not think that is the main reason.}
+
+\begin{center}
+\picturefile[0.8\linewidth]{figures/p5_0031_model_view.png}\par\small
+the photo, and the centre square the model sees
+\end{center}
 
 \mistake{figures/p5_mistake4_IMG_2230.png}
   {\textbf{4. Run model (trained before cleaning), my new image} \texttt{side\_triceps/IMG\_2230.PNG}: said back\_lat\_spread, 58.4\% sure; really side\_triceps. My own photo: a side triceps pose in a very dark room, the person small in the lower half, with a bright ceiling at the top.
