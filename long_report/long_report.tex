@@ -232,7 +232,12 @@ The five mistakes below come from two models. The first three are from the clean
 \mistake{figures/p5_mistake2_back_double_biceps_0014.jpg}
   {\textbf{2. Clean model, test set} \texttt{back\_double\_biceps/0014.jpg}: said back\_lat\_spread, 74.9\% sure; really back\_double\_biceps. A back double biceps from behind, close up, in a wide landscape photo, with both raised arms at the left and right edges.
 
-  \fillin{What pushed the model the wrong way.}}
+  I think the model got this wrong because the photo is very wide and taken from very close. In the full photo the arms are clearly raised and bent, but the centre crop of prepare\_image cuts off both forearms and fists, so the model only saw the head, upper back and shoulders. The lower back, waist and hips are not visible either, so the back looks very wide, which I think makes it look like a back lat spread. Both models made this mistake (clean 74.9\%, run 97.5\%).}
+
+\begin{center}
+\picturefile[0.8\linewidth]{figures/p5_0014_model_view.png}\par\small
+the photo, and the centre square the model sees
+\end{center}
 
 \mistake{figures/p5_mistake3_side_triceps_0031.jpg}
   {\textbf{3. Clean model, test set} \texttt{side\_triceps/0031.jpg}: said side\_chest, 53.6\% sure; really side\_triceps. A black-and-white close-up of a smiling bodybuilder turned sideways, from the waist up.
