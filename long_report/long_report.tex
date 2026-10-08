@@ -265,11 +265,9 @@ Address: \url{https://najrgrowth.github.io/mas1004-assignment1/}
            {A vacuum pose, which is none of my categories. The demo page said
             back\_double\_biceps at 57.1\%.}
 
-The percentages above were shown by the demo page in the browser, not printed
-by code in this repository.
+These two numbers are from the demo page, not from code output.
 
-\fillin{What happens when you show it something that is none of your
-categories.}
+I was not super surprised that, when I showed the model a front double biceps pose, it was super certain about it being a back double biceps pose (99.1\%). I think this is because the silhouette is really, really similar. When I showed it another pose with a different silhouette (but still one arm up and the lats flared), it still thought it was a back double biceps, but less certain (57.1\%). The model only has 4 answers, and it cannot say that it is none of those.
 
 % ---------------------------------------------------------------------------
 \section*{Problem 7. What the model looks at}
