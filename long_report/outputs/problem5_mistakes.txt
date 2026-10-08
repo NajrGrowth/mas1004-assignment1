@@ -1,0 +1,27 @@
+=== model results/clean_model.pt, trained on 361 images
+
+test set (72 images), most confident mistakes:
+   1. back_double_biceps/0014.jpg                said back_lat_spread     74.9%   really back_double_biceps
+   2. side_triceps/0031.jpg                      said side_chest          53.6%   really side_triceps
+
+new images (28 images), most confident mistakes:
+   1. new_images/back_lat_spread/IMG_2482.PNG    said side_triceps        80.4%   really back_lat_spread
+
+=== model results/run_model.pt, trained on 600 images
+
+test set (120 images), most confident mistakes:
+   1. side_chest/0083.jpg  (removed later)       said side_triceps        99.1%   really side_chest
+   2. side_chest/0023.jpg  (removed later)       said back_lat_spread     98.3%   really side_chest
+   3. back_lat_spread/0142.jpg  (removed later)  said side_triceps        97.6%   really back_lat_spread
+   4. back_lat_spread/0088.jpg  (removed later)  said back_double_biceps  97.6%   really back_lat_spread
+   5. back_double_biceps/0014.jpg                said back_lat_spread     97.5%   really back_double_biceps
+   6. side_triceps/0129.jpg  (removed later)     said back_lat_spread     97.4%   really side_triceps
+   7. side_triceps/0029.jpg  (removed later)     said back_lat_spread     92.4%   really side_triceps
+   8. back_lat_spread/0126.jpg  (removed later)  said back_double_biceps  91.8%   really back_lat_spread
+   9. back_lat_spread/0148.jpg  (removed later)  said back_double_biceps  90.0%   really back_lat_spread
+  10. side_chest/0069.jpg  (removed later)       said side_triceps        86.4%   really side_chest
+
+new images (28 images), most confident mistakes:
+   1. new_images/side_triceps/IMG_2230.PNG       said back_lat_spread     58.4%   really side_triceps
+   2. new_images/back_lat_spread/IMG_2482.PNG    said side_triceps        47.7%   really back_lat_spread
+

@@ -203,13 +203,42 @@ among your downloads.}
 \fillin{The accuracy on your downloaded test set and on your new images, side
 by side.}
 
-The clean model's most confident mistakes on the downloaded test set
-(\texttt{results/clean\_worst.png}):
+The five mistakes below come from two models. The first three are from the clean model, the one on the web page; it made only these three mistakes, one on my new images and two on its test set. The last two are from the \texttt{run} model, which was trained before cleaning. Of the \texttt{run} model's 10 most confident mistakes on its test set, 9 were on images I removed later while cleaning. The numbers come from \texttt{src/problem5\_mistakes.py}, whose output is below.
 
-\begin{center}\picturefile{figures/clean_worst.png}\end{center}
+% A picture with a short text next to it.
+\newcommand{\mistake}[2]{%
+  \par\noindent
+  \begin{minipage}[t]{0.3\linewidth}\vspace{0pt}\centering
+    \IfFileExists{#1}{\includegraphics[width=\linewidth,height=5cm,keepaspectratio]{#1}}{\picturefile{#1}}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.66\linewidth}\vspace{0pt}#2\end{minipage}\par\medskip}
 
-\fillin{Five mistakes it was confident about, with the pictures. For each one,
-what in the image you think pushed it the wrong way.}
+\mistake{figures/p5_mistake1_IMG_2482.png}
+  {\textbf{1. Clean model, my new image} \texttt{back\_lat\_spread/IMG\_2482.PNG}: said side\_triceps, 80.4\% sure; really back\_lat\_spread. My own photo: a back lat spread seen from behind, small and far away in a dark gym, with dumbbell racks filling the bottom half.
+
+  \fillin{What pushed the model the wrong way.}}
+
+\mistake{figures/p5_mistake2_back_double_biceps_0014.jpg}
+  {\textbf{2. Clean model, test set} \texttt{back\_double\_biceps/0014.jpg}: said back\_lat\_spread, 74.9\% sure; really back\_double\_biceps. A back double biceps from behind, close up, in a wide landscape photo, with both raised arms at the left and right edges.
+
+  \fillin{What pushed the model the wrong way.}}
+
+\mistake{figures/p5_mistake3_side_triceps_0031.jpg}
+  {\textbf{3. Clean model, test set} \texttt{side\_triceps/0031.jpg}: said side\_chest, 53.6\% sure; really side\_triceps. A black-and-white close-up of a smiling bodybuilder turned sideways, from the waist up.
+
+  \fillin{What pushed the model the wrong way.}}
+
+\mistake{figures/p5_mistake4_IMG_2230.png}
+  {\textbf{4. Run model (trained before cleaning), my new image} \texttt{side\_triceps/IMG\_2230.PNG}: said back\_lat\_spread, 58.4\% sure; really side\_triceps. My own photo: a side triceps pose in a very dark room, the person small in the lower half, with a bright ceiling at the top.
+
+  \fillin{What pushed the model the wrong way.}}
+
+\mistake{figures/p5_mistake5_side_chest_0023.jpg}
+  {\textbf{5. Run model (trained before cleaning), test set} \texttt{side\_chest/0023.jpg}: said back\_lat\_spread, 98.3\% sure; really side\_chest. A man seen from the front with his hands on his waist, which looks like a front lat spread. I removed it later as a wrong pose.
+
+  \fillin{What pushed the model the wrong way.}}
+
+\outputfile{outputs/problem5_mistakes.txt}
 
 \fillin{What is different about your new images: background, lighting, angle,
 distance, what else is in the frame.}
