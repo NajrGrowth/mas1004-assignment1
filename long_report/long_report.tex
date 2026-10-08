@@ -257,7 +257,7 @@ the photo, and the centre square the model sees
 \mistake{figures/p5_mistake5_side_chest_0023.jpg}
   {\textbf{5. Run model (trained before cleaning), test set} \texttt{side\_chest/0023.jpg}: said back\_lat\_spread, 98.3\% sure; really side\_chest. A man seen from the front with his hands on his waist, which looks like a front lat spread. I removed it later as a wrong pose.
 
-  \fillin{What pushed the model the wrong way.}}
+  I think the model was actually not wrong here: this photo is not a side chest at all, but a front lat spread, so it had the wrong label, which is why I removed it later as a wrong pose. The man faces the camera with his elbows out and his fists on his hips, which makes the body look wide, and I think the model recognised the lat spread shape and chose back\_lat\_spread, the closest of its four answers. It was very sure (98.3\%), which fits the other cases where it cannot say that a photo is none of the categories. This is from the run model, which was trained before cleaning.}
 
 \outputfile{outputs/problem5_mistakes.txt}
 
