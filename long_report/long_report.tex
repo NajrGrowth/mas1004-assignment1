@@ -199,8 +199,20 @@ The 28 new images are photos of myself after my training sessions, taken with my
 
 \outputfile{outputs/overlap.txt}
 
-\fillin{The accuracy on your downloaded test set and on your new images, side
-by side.}
+\begin{center}
+\begin{tabular}{lrr}
+\toprule
+clean model on & images & accuracy \\
+\midrule
+downloaded test set (\texttt{clean\_output.txt}) & 72 & 97.2\% \\
+my new images (\texttt{check.txt}) & 28 & 96.4\% (27/28) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The two accuracies differ by 0.8 percentage points, which is less than one image: with 28 images, one image changes the percentage by about 3.6 points.
+
+\fillin{Why it did not get worse on my new images.}
 
 The five mistakes below come from two models. The first three are from the clean model, the one on the web page; it made only these three mistakes, one on my new images and two on its test set. The last two are from the \texttt{run} model, which was trained before cleaning. Of the \texttt{run} model's 10 most confident mistakes on its test set, 9 were on images I removed later while cleaning. The numbers come from \texttt{src/problem5\_mistakes.py}, whose output is below.
 
