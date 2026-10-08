@@ -252,7 +252,7 @@ the photo, and the centre square the model sees
 \mistake{figures/p5_mistake4_IMG_2230.png}
   {\textbf{4. Run model (trained before cleaning), my new image} \texttt{side\_triceps/IMG\_2230.PNG}: said back\_lat\_spread, 58.4\% sure; really side\_triceps. My own photo: a side triceps pose in a very dark room, the person small in the lower half, with a bright ceiling at the top.
 
-  \fillin{What pushed the model the wrong way.}}
+  I think the run model got this wrong because the photo is very dark, which makes the pose hard to recognise. I am also turned quite open towards the camera and less to the side, so my shoulders look broad compared to my waist, which fits a back lat spread. I think the run model may have looked mostly at this silhouette. The clean model got this photo right (this is from the run model, which was trained before cleaning).}
 
 \mistake{figures/p5_mistake5_side_chest_0023.jpg}
   {\textbf{5. Run model (trained before cleaning), test set} \texttt{side\_chest/0023.jpg}: said back\_lat\_spread, 98.3\% sure; really side\_chest. A man seen from the front with his hands on his waist, which looks like a front lat spread. I removed it later as a wrong pose.
