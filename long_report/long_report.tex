@@ -80,7 +80,7 @@ clean & ImageNet & all layers & 10 & 0.0001 & 11,178,564 & 100.0\% & 97.2\% \\
 
 \picturefile{figures/run_curves.png}
 
-The training loss went down fast, from 0.93 in epoch 1 to 0.20 in epoch 2, and then kept slowly going down to 0.04. The test loss leveled off around 0.52--0.57 from epoch 2 onward and stayed roughly flat for the rest of training, while test accuracy settled around 83--85\%. The epochs20 run shows the same pattern continuing: the extra 10 epochs added only 2.5 percentage points of test accuracy (85.8\% vs.\ 83.3\%), while test loss kept slowly creeping upward from about 0.53 to 0.60 --- the model was no longer learning anything generalizable, just slightly overfitting further.
+The training loss went down fast, from 0.93 in epoch 1 to 0.20 in epoch 2, and then kept slowly going down to 0.04. The test loss leveled off around 0.52--0.57 from epoch 2 onward and stayed roughly flat for the rest of training, while test accuracy settled around 83--85\%. The epochs20 run shows the same pattern continuing: the extra 10 epochs added only 2.5 percentage points of test accuracy (85.8\% vs.\ 83.3\%), while test loss kept slowly creeping upward from about 0.53 to 0.60 --- the model was no longer learning anything generalizable, just slightly overfitting further. The loss and accuracy values in this paragraph are rounded by me; the exact values are in run\_output.txt, epochs20\_output.txt and report\_numbers.txt.
 
 The main run reached 98.8\% train accuracy but only 83.3\% test accuracy, a 15.5-point gap. The model learns the 480 training images almost perfectly, but does worse on images it has not seen. This is overfitting: with so few images, it partly memorizes them.
 
@@ -141,19 +141,16 @@ The image is a near-duplicate of another image already kept in the same category
 \subsection*{What I removed}
 \outputfile{outputs/clean_count.txt}
 
-The initial clean.py suspects run on the original 600 images found 139 near-copy pairs (this breakdown came from an ad-hoc command, not repository code): 35 same-category pairs at similarity $\geq$0.99, 78 same-category pairs at 0.95–0.99, 16 cross-category pairs at $\geq$0.99, and 10 cross-category pairs at 0.95–0.99.
+The initial clean.py suspects run on the original 600 images found 139 near-copy pairs (printed by src/report\_numbers.py, see the appendix): 35 same-category pairs at similarity $\geq$0.99, 78 same-category pairs at 0.95–0.99, 16 cross-category pairs at $\geq$0.99, and 10 cross-category pairs at 0.95–0.99.
 
 For the 113 same-category pairs, I first dealt with the ones that also broke another rule (32 pairs had both images removed for other reasons, such as being video thumbnails or showing the wrong pose). Of the remaining 81 pairs, which formed 40 distinct groups, I kept exactly one image per group and removed the rest as near-duplicates (60 images removed in total). Two groups were an exception: in one, the two images (similarity 0.9775) turned out to be different photographs of different people, not copies, so both were kept; in another, two images were visually distinct frames from the same photo series (not directly flagged as similar to each other by the tool) and were both kept.
 
-For the 26 cross-category pairs (the same photo filed under two different pose labels, often forming groups of 3–7 images across Side Chest and Side Triceps in particular), I applied my rule's addition: where the pose was clearly identifiable, I kept it in its correct category and removed it from the other(s) — this applied to 3 groups. The remaining 6 groups were removed entirely from all categories, though in every case for a specific reason (video thumbnail, stretch pose, regular clothing, or illustration) rather than because the pose itself was ambiguous.
+For the 26 cross-category pairs (the same photo filed under two different pose labels, often forming groups of 2–7 images across Side Chest and Side Triceps in particular), I applied my rule's addition: where the pose was clearly identifiable, I kept it in its correct category and removed it from the other(s) — this applied to 3 groups. The remaining 6 groups were removed entirely from all categories, though in every case for a specific reason (video thumbnail, stretch pose, regular clothing, or illustration) rather than because the pose itself was ambiguous.
 
 Of the first 20 suspects in each class, I removed: back\_double\_biceps 9,
-back\_lat\_spread 17, side\_chest 18, side\_triceps 17. These counts were
-computed with an ad-hoc command, not with code in this repository, because
-\texttt{clean.py count} does not break the removals down this way: it matched
-the first 20 suspects of each class in
-\texttt{results/cleaning/suspects/suspects.csv} against the files in
-\texttt{data/removed/}.
+back\_lat\_spread 18, side\_chest 18, side\_triceps 17. These counts are
+printed by \texttt{src/report\_numbers.py} (see the appendix), because
+\texttt{clean.py count} does not break the removals down this way.
 
 After cleaning, back\_lat\_spread had 74 images left, far fewer than the
 other three classes, so I downloaded more with the search phrase ``back lat
@@ -166,10 +163,8 @@ other 59 to \texttt{data/raw/back\_lat\_spread} and
 \texttt{data/clean/back\_lat\_spread} as \texttt{0151.jpg} to \texttt{0209.jpg},
 applied my rule to them, and removed 31 (30 at first, and \texttt{0180.jpg} later,
 after it appeared among the clean model's most confident mistakes and I saw it
-shows a front lat spread), which leaves 28. The 150, 91 (with its breakdown) and 59
-were computed with an ad-hoc script, not with code in this repository, which
-has no command for adding to one class; the 31 removed are in the
-\texttt{clean.py count} output above. These 59 images were not in the suspect
+shows a front lat spread), which leaves 28. The 150, 91 (with its breakdown), 59, 31 and 28 are printed by
+\texttt{src/report\_numbers.py} (see the appendix). These 59 images were not in the suspect
 list, so the first-20 counts above do not include them.
 
 The suspect list caught most of the junk I had already noticed during an initial scan — mainly video thumbnails, illustrations, and the more obvious near-duplicates. It was not exhaustive, however. Going through every remaining image individually after clearing the suspects, I found substantially more junk it had not flagged: most notably images showing the wrong pose entirely (12 Front Lat Spread and 1 Back Double Biceps photo mislabeled as Back Lat Spread, for example), multiple-person photos, and low-quality social media screenshots. This second pass removed more images (115) than the first suspect-based pass (92). A separate near-copy sheet, built specifically to find same-category duplicate groups, then caught a further 60 duplicate images that neither the original suspect ranking nor my own manual scan had removed, since visually ``normal'' duplicate photos don't stand out the way genuinely odd or wrong images do. This suggests the suspect detector is better at catching visually unusual outliers than at catching confidently normal-looking images that are either mislabeled or simply repeated.
@@ -346,7 +341,7 @@ The model's answers below are from \texttt{results/problem7\_guess1.txt}.
 
 \outputfile{outputs/problem7_guess1.txt}
 
-\textbf{Results:} my prediction was pretty accurate. For the original photos the model was on average 98.1\% certain of it being back double biceps. For the photos with the arms covered, the model was on average 48.1\% certain, with 2 of the images being mistaken for side triceps. The spreading is pretty big, the lowest certainty was 5.4\% and the highest 71.7\%. And for the control covered group, the model was on average 95.7\% certain. (I asked Claude Code to calculate these average percentages.)
+\textbf{Results:} my prediction was pretty accurate. For the original photos the model was on average 98.1\% certain of it being back double biceps. For the photos with the arms covered, the model was on average 48.1\% certain, with 2 of the images being mistaken for side triceps. The spreading is pretty big, the lowest certainty was 5.4\% and the highest 71.7\%. And for the control covered group, the model was on average 95.7\% certain. (These averages are printed by src/problem7\_predict.py.)
 
 \textbf{What I think the model uses (after 1 guess):} I think the arm position is one of the model's most important points for back\_double\_biceps. Covering both arms dropped its average certainty from 98.1\% to 48.1\%, while covering the lower back almost didn't change it (95.7\%). Also, the demo page was 99.1\% sure that a front double biceps photo was a back double biceps. The arm position and silhouette are very similar, and only the direction you face differs.
 
@@ -453,7 +448,7 @@ The model's answers below are from \texttt{results/problem7\_guess2.txt}.
 
 \textbf{What I think the model uses:} I still believe the model focuses mostly on the arms, but the upper back still plays a role too.
 
-\textbf{How sure I am:} I am fairly sure that covering the arms had a bigger effect than covering the back for these 7 images. I cannot say that the arms matter more by themselves, because the blocks were not equally large. I also did not cover the arms and back together, and I tested only 7 images and one model. The control for IMG\_1481 was left out (16\% of its block was inside the model's view), the control for IMG\_2359 was only 67\% inside it, and for three images the control block lay on a dark background.
+\textbf{How sure I am:} I am fairly sure that covering the arms had a bigger effect than covering the back for these 7 images. I cannot say that the arms matter more by themselves, because the blocks were not equally large. I also did not cover the arms and back together, and I tested only 7 images and one model. The control for IMG\_1481 was left out (16\% of its block was inside the model's view), the control for IMG\_2359 was only 67\% inside it, and for three images the control block lay on a dark background (by eye).
 
 \subsection*{Guess 3}
 
@@ -465,7 +460,7 @@ The model's answers below are from \texttt{results/problem7\_guess2.txt}.
 
 The block was too wide and it would overlap with the shoulders and a part of the arms so extra prompt.
 
-This also did not really work, as now on 5 of 7 pictures there was no space left for the control block, and on 2 of those the covered block ran off the bottom of the photo. Therefore I sent this prompt.
+This also did not really work, as now on 5 of 7 pictures there was no space left for the control block, and on 2 of those the covered block ran off the bottom of the photo (from the agent's preview, which was not saved). Therefore I sent this prompt.
 
 My requests to the agent, word for word, in order:
 \begin{quote}
@@ -576,5 +571,8 @@ I am fairly sure that the arms matter more than the area alone, because the gap 
 % ---------------------------------------------------------------------------
 \section*{Appendix. Output of check.py}
 \outputfile{outputs/check.txt}
+
+\section*{Appendix. Output of report\_numbers.py}
+\outputfile{outputs/report_numbers.txt}
 
 \end{document}
